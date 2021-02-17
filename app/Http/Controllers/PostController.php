@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class PostController extends Controller
 {
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         return view('posts', ['posts' => $posts]);
     }
 
@@ -67,7 +68,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('postEdit', ['post' => $post]);
     }
 
     /**
@@ -79,7 +80,9 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $post->fill($request->all());
+        $post->save();
+        return redirect()->route('post.index');
     }
 
     /**

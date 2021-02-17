@@ -21,8 +21,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/post', [PostController::class, 'index'])->name('post.index');
-Route::post('/post', [PostController::class, 'store'])->name('post.store');
-Route::DELETE('/post/{post}', [PostController::class, 'destroy'])->name('post.delete');
+Route::resource('post', PostController::class);
