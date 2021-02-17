@@ -25,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/post', [PostController::class, 'index'])->name('post.index');
 Route::post('/post', [PostController::class, 'store'])->name('post.store');
+Route::DELETE('/post/{post}', [PostController::class, 'destroy'])->name('post.delete');

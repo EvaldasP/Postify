@@ -18,11 +18,13 @@
         <div class="media border p-3">
             <img src="img_avatar3.png" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
             <div class="media-body">
-              <h4>{{$post->user->username}}<small><i> Posted on February 19, 2016</i></small></h4>
+              <h4>{{$post->user->username}}<small><i> Posted on {{$post->created_at}}</i></small></h4>
               <p>{{$post->post}}</p>
-              @if ($post->user->id == auth()->id())
-                <a href="#" class="card-link">delete</a>
-                <a href="#" class="card-link">update</a>
+            @if($post->ownedBy(auth()->user()))
+                    <form action="{{route('post.delete', $post->id)}}" method="post">
+                        @csrf @method('DELETE')
+                        <input type="submit" class="btn btn-danger" value="Trinti"/>
+                    </form>
               @endif
             </div>
           </div>
