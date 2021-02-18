@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +15,10 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
 Route::resource('post', PostController::class);
+Route::get('/', [PostController::class, 'index'])->middleware('auth');
+Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('post.like');
+Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('post.delete');

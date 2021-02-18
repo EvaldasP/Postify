@@ -28,7 +28,24 @@
                     </form>
               @endif
             </div>
-          </div>
+                <div class="wrapper">
+                    <div id="likeUnlike" class="">
+                        @if(!$post->likedBy(auth()->user()))
+                            <form action="{{route('post.like', $post->id)}}" method="post" >
+                            @csrf
+                            <button type="submit">👍</button>
+                            </form>
+                        @else
+                            <form action="{{route('post.delete', $post->id)}}" method="post" >
+                            @csrf
+                            @method('DELETE')
+                                <button type="submit" class="">👎</button>
+                            </form>
+                        @endif
+                    </div>
+                    <span>Post Liked {{$post->likes->count()}}</span>
+                </div>
+        </div>       
     @endforeach
     <div class="d-flex justify-content-center">
         {!! $posts->links() !!}

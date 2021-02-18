@@ -13,8 +13,26 @@ button {
 
 #postas {
     margin-bottom: 10px !important;
+    align-items: center;
 }
 
 h3 {
     margin-top: 20px;
+}
+
+#likeUnlike {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+#likeUnlike form {
+    button {
+        border: none;
+        background-color: #239b56;
+    }
+}
+
+.wrapper {
+    height: 100%;
 }
